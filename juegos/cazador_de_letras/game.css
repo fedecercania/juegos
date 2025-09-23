@@ -1,0 +1,117 @@
+.game-container { max-width: 960px; margin: 24px auto; padding: 0 20px; }
+.hero.small h2 { margin: 4px 0 10px; font-size: 24px; }
+.level-buttons { display: grid; grid-template-columns: 1fr; gap: 10px; }
+.level-btn { padding: 10px 12px; border-radius: 10px; border: 1px solid rgba(0,0,0,0.06); background: #fff; cursor: pointer; font-weight: 700; }
+.level-btn:hover { background: #fff7ed; }
+
+.hidden { display: none; }
+.row-actions { margin-top: 12px; display: flex; gap: 8px; }
+.btn-secondary { display: inline-block; padding: 8px 12px; border-radius: 10px; border: 1px solid #d1d5db; background: #fff; cursor: pointer; }
+
+.gallery-grid { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
+.thumb { position: relative; width: clamp(180px, 28vw, 240px); border: 1px solid rgba(0,0,0,0.08); border-radius: 12px; overflow: hidden; background: #fff; cursor: pointer; }
+.thumb img { display: block; width: 100%; height: auto; object-fit: contain; }
+.thumb .label { display: none; }
+
+.play-title { display:none; }
+.prompt { margin: 0 0 12px; color: var(--muted); }
+.input-row { display: flex; gap: 8px; }
+.input-row input[type="text"] { flex: 1; padding: 10px; border: 1px solid #d1d5db; border-radius: 10px; font-size: 16px; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0; }
+.chip { display: inline-block; padding: 6px 8px; border-radius: 8px; background: #e0f2fe; color: #075985; border: 1px solid rgba(0,0,0,0.06); cursor: pointer; }
+
+.feedback { margin-top: 10px; font-weight: 700; }
+.ok { color: #16a34a; }
+.bad { color: #dc2626; }
+
+.sentence { font-size: 18px; }
+.sentence .gap { display: inline-block; min-width: 1.5ch; border-bottom: 2px dashed #f59e0b; margin: 0 3px; }
+.guide { font-size: 14px; color: var(--muted); margin-top: 8px; }
+
+/* Nivel 1 - layout dos columnas y dnd */
+.level1 { position: relative; }
+.level1 .content { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 16px; align-items: start; }
+.level1 .word { font-size: 56px; letter-spacing: 3px; line-height: 1.6; text-align: center; white-space: nowrap; overflow-x: auto; }
+.level1 .gap { display: inline-grid; place-items: center; width: 56px; height: 64px; border: 3px dashed #f59e0b; border-radius: 12px; margin: 0 6px; background: #fffdf5; color: #111; font-weight: 800; font-size: 42px; }
+.level1 .gap.correct { border-color: #22c55e; background: #ecfdf5; }
+.level1 .gap.over { outline: 3px solid rgba(34,197,94,0.4); }
+.level1 .chips { margin-top: 16px; display: flex; flex-wrap: wrap; justify-content: center; }
+.chip[draggable="true"] { cursor: grab; }
+.chip.used { opacity: 0.4; cursor: default; }
+.chip { font-size: 22px; padding: 10px 14px; }
+.chip.wrong { background: #fee2e2; border-color: #ef4444; animation: shake 180ms linear 0s 1; }
+.chip.correct { background: #dcfce7; border-color: #22c55e; }
+.level1 .picture img { width: 100%; max-height: 280px; object-fit: contain; border-radius: 12px; border: 1px solid rgba(0,0,0,0.08); }
+
+/* Botón flotante: Otra imagen */
+.row-actions { position: static; display: flex; justify-content: flex-end; margin-top: 16px; }
+.btn-next { padding: 12px 16px; border-radius: 999px; background: linear-gradient(180deg, #22c55e, #16a34a); color: #052e16; font-weight: 800; border: none; box-shadow: 0 10px 20px rgba(34,197,94,0.35); cursor: pointer; }
+.btn-next:hover { filter: brightness(1.05); }
+
+@keyframes shake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-3px); }
+  50% { transform: translateX(3px); }
+  75% { transform: translateX(-2px); }
+  100% { transform: translateX(0); }
+}
+
+/* Overlay de éxito */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(34,197,94,0.15);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+}
+.overlay.show { display: flex; animation: pop 300ms ease-out; }
+.overlay .burst { font-size: 72px; background: #22c55e; color: white; padding: 20px 28px; border-radius: 16px; box-shadow: 0 20px 60px rgba(34,197,94,0.4); }
+
+@keyframes pop {
+  0% { transform: scale(0.9); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* Nivel 2 - segmentación por clic (sin input) */
+.seg {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 16px;
+  align-items: start;
+}
+.seg-row { display: flex; flex-wrap: nowrap; gap: 4px; justify-content: center; align-items: center; overflow-x: auto; }
+.seg-letter { background: #fff; padding: 6px 10px; border-radius: 8px; border: 1px solid rgba(0,0,0,0.06); font-size: 28px; letter-spacing: 1px; }
+.seg-gap { width: 16px; height: 28px; display: inline-flex; align-items: center; justify-content: center; cursor: pointer; border-radius: 4px; position: relative; }
+.seg-gap::after { content: ""; width: 2px; height: 60%; background: transparent; transition: background 120ms ease; }
+.seg-gap:hover::after { background: #93c5fd; }
+.seg-gap.on { background: #dbeafe; box-shadow: inset 0 0 0 2px #60a5fa; }
+.seg-gap.on::after { background: #1d4ed8; }
+.seg-preview { margin-top: 12px; font-size: 18px; }
+
+/* Subnivel 3 - elección de cantidad y campos de palabra */
+.lines-choice { display: grid; grid-template-columns: repeat(3, minmax(120px, 1fr)); gap: 12px; margin-top: 10px; }
+.lines-card { cursor: pointer; border: 1px solid rgba(0,0,0,0.08); background: #fff; border-radius: 12px; padding: 12px; display: grid; gap: 8px; place-items: center; }
+.lines-card:focus, .lines-card:hover { outline: 3px solid #22c55e; }
+.line-preview { width: 100%; height: 16px; background: repeating-linear-gradient( to bottom, transparent 0 10px, #e5e7eb 10px 12px ); border-radius: 6px; }
+.compose-input { width: 100%; padding: 10px 0; border: 0; border-bottom: 3px solid #e5e7eb; background: transparent; font-size: 18px; }
+.compose-input:focus { outline: none; border-color: #60a5fa; }
+
+/* Layout horizontal para subnivel 3 */
+.write-row { display: grid; grid-template-columns: 1fr 360px; gap: 16px; align-items: start; }
+.compose-inline { display: flex; flex-wrap: nowrap; gap: 10px; overflow-x: auto; }
+.compose-inline .compose-input { width: 160px; }
+.lines-card.wrong { outline: 3px solid #ef4444; }
+
+/* Alinear una fila a la derecha cuando se usa en columna única */
+.right-end { display: flex; justify-content: flex-end; align-items: flex-start; }
+.right-end .gallery-grid { display: flex; flex-wrap: nowrap; gap: 12px; justify-content: flex-end; overflow-x: auto; }
+.right-end .gallery-grid .thumb { flex: 0 0 220px; }
+
+/* Nivel 3 - inputs multilinea con líneas y prefijo fijo */
+.compose-row { display: flex; align-items: flex-start; gap: 8px; margin: 10px 0; }
+.prefix-badge { display: inline-block; padding: 6px 10px; border-radius: 999px; background: #e0f2fe; color: #075985; border: 1px solid rgba(0,0,0,0.06); font-weight: 700; white-space: nowrap; }
+.textarea-lines { width: 100%; min-height: 96px; line-height: 28px; padding: 10px 12px; border-radius: 12px; border: 1px solid #d1d5db; font-size: 18px; resize: vertical; background: repeating-linear-gradient( to bottom, #ffffff 0 26px, #eef2f7 26px 28px ); }
+.textarea-lines:focus { outline: none; border-color: #60a5fa; box-shadow: 0 0 0 3px rgba(96,165,250,0.25); }
+

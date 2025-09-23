@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cazador de Letras</title>
+  <link rel="stylesheet" href="../../styles.css">
+  <link rel="stylesheet" href="game.css">
+  <link rel="icon" href="data:,">
+  
+</head>
+<body>
+  <header>
+    <div class="site-header" style="max-width:960px;margin:0 auto;padding:0 20px; background-image:url('Investigador.jpg'); background-size: cover; background-position: center; border-bottom-left-radius:12px;border-bottom-right-radius:12px;">
+      <div class="brand" style="backdrop-filter: blur(6px); background: rgba(255,255,255,0.6); padding:8px 12px; border-radius:12px;">
+        <span class="logo">🔤</span> <span>Cazador de Letras</span>
+      </div>
+      <nav><a class="btn-primary" href="../../index.html">Volver al portal</a></nav>
+    </div>
+  </header>
+  <main class="game-container">
+    <section class="card hero small">
+      <div class="bubbles">
+        <div class="bubble b1"></div>
+        <div class="bubble b2"></div>
+        <div class="bubble b3"></div>
+      </div>
+      <h2>Elegí un nivel</h2>
+      <div class="level-buttons">
+        <button class="level-btn" data-level="1">Nivel 1: Palabra con letras faltantes</button>
+        <button class="level-btn" data-level="2">Nivel 2: Segmentar enunciado + imagen correcta</button>
+        <button class="level-btn" data-level="3">Nivel 3: Escribir 1-3 oraciones guiadas</button>
+      </div>
+    </section>
+
+    <section id="gallery" class="card hidden">
+      <h3>Elegí una imagen</h3>
+      <div class="gallery-grid" id="galleryGrid"></div>
+    </section>
+
+    <section id="playground" class="card hidden"></section>
+    <div id="overlay" class="overlay" aria-hidden="true"><div class="burst">¡Genial! 🎉</div></div>
+  </main>
+
+  <script src="game.js"></script>
+</body>
+</html>
+
+
