@@ -117,6 +117,37 @@ function renderLevel1(playground, img) {
     }
   });
 
+  // Tap-to-place (móvil): seleccionar ficha y luego tocar hueco
+  let selectedChip = null;
+  chips.addEventListener('click', e => {
+    const btn = e.target instanceof Element && e.target.closest('.chip');
+    if (!btn) return;
+    if (btn.classList.contains('used')) return;
+    if (selectedChip) selectedChip.classList.remove('selected');
+    selectedChip = btn;
+    btn.classList.add('selected');
+  });
+  container.addEventListener('click', e => {
+    const gapEl = e.target instanceof Element && e.target.classList.contains('gap') ? e.target : null;
+    if (!gapEl || !selectedChip) return;
+    const letter = selectedChip.dataset.letter;
+    const idx = Number(gapEl.dataset.idx);
+    const expected = missing.find(m => m.idx === idx);
+    if (expected && expected.ch === letter) {
+      gapEl.textContent = letter;
+      gapEl.classList.add('correct');
+      selectedChip.classList.add('used','correct');
+      selectedChip.setAttribute('draggable','false');
+      selectedChip.classList.remove('selected');
+      selectedChip = null;
+      checkWin();
+    } else {
+      selectedChip.classList.add('wrong');
+      setTimeout(() => selectedChip && selectedChip.classList.remove('wrong'), 220);
+      try { playError(); } catch {}
+    }
+  });
+
   container.addEventListener('dragover', e => {
     const overGap = e.target instanceof Element && e.target.classList.contains('gap');
     if (overGap) { e.preventDefault(); e.target.classList.add('over'); }

@@ -19,6 +19,7 @@
 .input-row input[type="text"] { flex: 1; padding: 10px; border: 1px solid #d1d5db; border-radius: 10px; font-size: 16px; }
 .chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0; }
 .chip { display: inline-block; padding: 6px 8px; border-radius: 8px; background: #e0f2fe; color: #075985; border: 1px solid rgba(0,0,0,0.06); cursor: pointer; }
+.chip.selected { outline: 3px solid #60a5fa; }
 
 .feedback { margin-top: 10px; font-weight: 700; }
 .ok { color: #16a34a; }
