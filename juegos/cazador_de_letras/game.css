@@ -75,6 +75,13 @@
   100% { transform: scale(1); opacity: 1; }
 }
 
+/* Forzar horizontal en móviles: overlay en modo vertical */
+.rotate-overlay { position: fixed; inset: 0; display: none; align-items: center; justify-content: center; text-align: center; padding: 24px; background: #0f172a; color: #fff; z-index: 60; }
+.rotate-overlay .card { background: #111827; border: 1px solid rgba(255,255,255,0.12); padding: 16px 20px; border-radius: 14px; }
+@media (orientation: portrait) and (max-width: 900px) {
+  .rotate-overlay { display: flex; }
+}
+
 /* Nivel 2 - segmentación por clic (sin input) */
 .seg {
   display: grid;
